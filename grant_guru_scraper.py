@@ -1,5 +1,3 @@
-# to activate venv: source venv/bin/activate
-
 import time
 import csv
 import re
@@ -69,6 +67,7 @@ def scroll_and_load(user_date, driver):
             else:
                 print("Timeout while waiting for the page to load")
 
+        # Extracting grants within timeframe 
         grant_objects = driver.find_elements(By.CLASS_NAME, 'ResultItemStyle_container__UYc1r')
         for grant_object in grant_objects:
             try: 
@@ -190,9 +189,5 @@ def main():
 if __name__ == "__main__":
     main()
     driver.quit() 
-    time.sleep(5) # break to read file before it closes
+    time.sleep(5)
     file.close()
-
-# spot check
-# add logins to gitignore ? 
-# update wait times

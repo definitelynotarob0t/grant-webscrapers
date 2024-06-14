@@ -113,7 +113,7 @@ def main():
     email_input.send_keys(email)
     password_input.send_keys(password)
     login_button.click()
-    time.sleep(5) #update
+    time.sleep(5)
 
     # Navigating to grants page
     find_grants_button = driver.find_element(By.XPATH, '//*[@id="main-layout"]/div[2]/div/div/div/ul/li[1]')

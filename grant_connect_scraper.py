@@ -1,7 +1,5 @@
 # scraping by the default sorting - starts with those closing soonest, ongoing at the end
 
-# to activate venv: source venv/bin/activate
-
 import csv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -28,7 +26,7 @@ url = 'https://www.grants.gov.au/Go/List'
 driver.get(url)
 WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "mainContent"))) #update?
 
-#Finding total number of grants
+# Finding total number of grants
 total_records = driver.find_element(By.XPATH, '/html/body/div[1]/div/main/div/form[2]/div/div/div/div[1]/strong').text
 
 # Add all grant names and URLs to a list to be looped through later
@@ -112,7 +110,7 @@ for grant in grant_names_urls:
                         secondary_category = ''
 
 
-        except Exception as e: # update
+        except Exception as e: 
                 print(f"An error occurred: {e} for {grant['name']}")
                 writer.writerow([grant['name'], 'An error occured', '', '', '', '', '', '', '', '', '', '', '', ''])
                 continue
@@ -120,6 +118,4 @@ for grant in grant_names_urls:
         writer.writerow([grant['name'], total_amount, estimated_value, location, selection_process, publish_date, close_date, description, eligibility, grant_timeframe, agency, primary_category, secondary_category, grant['url']])
 driver.quit()
 file.close()
-
-#updates: more robust error handling, e.g. timeouts
 

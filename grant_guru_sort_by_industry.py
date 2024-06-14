@@ -1,5 +1,3 @@
-# to activate venv: source venv_name/bin/activate
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -53,7 +51,7 @@ def industry_filter(driver):
     root = tk.Tk()
     root.title("Select Industries")
     
-    # Availale industries on webiste -- MAY NEED UPDATING
+    # Availale industries listed on webiste
     industries = [
         "General - Non-Industry Specific",
         "Aeronautics",
@@ -197,8 +195,7 @@ def main():
 
     login_url = 'https://grantguru.com/au/login'
     driver.get(login_url)
-    time.sleep(5)
-    #WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.NAME, "login")))
+    WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.NAME, "login")))
 
     load_dotenv()
     email = os.getenv('EMAIL')
@@ -211,26 +208,22 @@ def main():
     email_input.send_keys(email)
     password_input.send_keys(password)
     login_button.click()
-    time.sleep(5)
-    # WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="main-layout"]/div[2]/div/div/div/ul/li[1]')))
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="main-layout"]/div[2]/div/div/div/ul/li[1]')))
 
     find_grants_button = driver.find_element(By.XPATH, '//*[@id="main-layout"]/div[2]/div/div/div/ul/li[1]')
     find_grants_button.click()
-    time.sleep(5)
-    #WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="main-layout"]/div[5]/div[4]/div/div/div[1]/div/div[1]/div[2]/div/span[2]')))
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="main-layout"]/div[5]/div[4]/div/div/div[1]/div/div[1]/div[2]/div/span[2]')))
     
     # Filtering for industry/industries
     industry_filter(driver)
     
     # Sorting results by 'Recent alert'
     sort_button = driver.find_element(By.CLASS_NAME, 'GSortStyle_label__phn9R')
-    #sort_button = driver.find_element(By.XPATH, '//*[@id="main-layout"]/div[5]/div[4]/div/div/div[1]/div/div[1]/div[2]/div/span[2]') # update to class_name?
     sort_button.click()
     WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, '//*[@id="main-layout"]/div[5]/div[4]/div/div/div[1]/div/div[1]/div[2]/div/div/div/div')))
     recent_alert_button = driver.find_element(By.XPATH, '//*[@id="main-layout"]/div[5]/div[4]/div/div/div[1]/div/div[1]/div[2]/div/div/div/ul/li[3]')
     recent_alert_button.click()
-    time.sleep(3)
-    #WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, '//*[@id="main-layout"]/div[5]/div[4]/div/div/div[1]/div/div[1]/div[2]/div/span[2]')))
+    WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, '//*[@id="main-layout"]/div[5]/div[4]/div/div/div[1]/div/div[1]/div[2]/div/span[2]')))
 
     # Finding total number of grants
     total_count_and_worth = driver.find_element(By.XPATH, '//*[@id="main-layout"]/div[5]/div[4]/div/div/div[1]/div/div[1]/div[1]/span').text
@@ -248,8 +241,3 @@ def main():
     
 if __name__ == "__main__":
     main()
-
-
-# check department
-# add industry names to file
-# spot check
